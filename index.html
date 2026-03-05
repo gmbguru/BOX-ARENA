@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOX ARENA - Premium Sports Turf in Delhi</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); }
+      50% { box-shadow: 0 0 40px rgba(34, 197, 94, 0.8); }
+    }
+    
+    @keyframes slide-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .animate-float { animation: float 3s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
+    .animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a2f 50%, #0f172a 100%);
+    }
+    
+    .card-gradient {
+      background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+    }
+    
+    .text-gradient {
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .whatsapp-btn {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    }
+    
+    .whatsapp-btn:hover {
+      background: linear-gradient(135deg, #2be877 0%, #159c8c 100%);
+      transform: translateY(-2px);
+    }
+    
+    .facility-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(34, 197, 94, 0.5);
+    }
+    
+    .gallery-img:hover {
+      transform: scale(1.05);
+    }
+    
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .lightbox.active {
+      display: flex;
+    }
+    
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85%;
+      object-fit: contain;
+    }
+    
+    .lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(34, 197, 94, 0.8);
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .lightbox-arrow:hover {
+      background: rgba(34, 197, 94, 1);
+      transform: translateY(-50%) scale(1.1);
+    }
+    
+    .lightbox-prev { left: 2rem; }
+    .lightbox-next { right: 2rem; }
+    
+    .lightbox-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: rgba(239, 68, 68, 0.8);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .lightbox-close:hover {
+      background: rgba(239, 68, 68, 1);
+      transform: scale(1.1);
+    }
+    
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #22c55e;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    .section-visible {
+      animation: slide-up 0.6s ease-out forwards;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-inter bg-slate-900 text-white overflow-x-hidden">
+  <div id="app-container" class="w-full min-h-full">
+   <!-- Navigation -->
+   <nav class="fixed top-0 left-0 right-0 z-50 glass-card">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-2">
+       <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
+        <span class="font-bebas text-xl">BA</span>
+       </div><span id="nav-title" class="font-bebas text-2xl text-gradient">BOX ARENA</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+       <a href="#facilities" class="nav-link text-gray-300 hover:text-white transition-colors">Facilities</a> <a href="#gallery" class="nav-link text-gray-300 hover:text-white transition-colors">Gallery</a> <a href="#why-us" class="nav-link text-gray-300 hover:text-white transition-colors">Why Us</a> <a href="#pricing" class="nav-link text-gray-300 hover:text-white transition-colors">Pricing</a> <a href="#location" class="nav-link text-gray-300 hover:text-white transition-colors">Location</a> <button onclick="openWhatsApp('nav')" class="whatsapp-btn px-4 py-2 rounded-full text-white font-semibold flex items-center gap-2 transition-all">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg> Book Now </button>
+      </div><button onclick="openWhatsApp('mobile-nav')" class="md:hidden whatsapp-btn px-3 py-2 rounded-full text-white text-sm font-semibold"> Book Now </button>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section class="hero-gradient min-h-screen flex items-center relative overflow-hidden pt-16">
+    <div class="absolute inset-0 opacity-20">
+     <div class="absolute top-20 left-10 w-72 h-72 bg-green-500 rounded-full filter blur-3xl"></div>
+     <div class="absolute bottom-20 right-10 w-96 h-96 bg-emerald-600 rounded-full filter blur-3xl"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+     <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-8">
+       <div class="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2">
+        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> <span class="text-green-400 text-sm font-medium">Now Open for Bookings</span>
+       </div>
+       <h1 id="hero-title" class="font-bebas text-6xl sm:text-7xl lg:text-8xl leading-none"><span class="text-white">BOX</span> <span class="text-gradient"> ARENA</span></h1>
+       <p id="hero-subtitle" class="text-xl sm:text-2xl text-gray-300 max-w-lg">Box Cricket, Football Turf &amp; Bowling Machine in Sarita Vihar, Delhi</p>
+       <p class="text-gray-400 text-lg max-w-lg">Looking for the perfect place to play box cricket or football with friends in Delhi? Experience premium sports at its finest!</p>
+       <div class="flex flex-col sm:flex-row gap-4">
+        <button onclick="openWhatsApp('hero-book')" class="whatsapp-btn animate-pulse-glow px-8 py-4 rounded-full text-white font-bold text-lg flex items-center justify-center gap-3 transition-all">
+         <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+         </svg> Book Your Slot Now </button> <a href="#facilities" class="border-2 border-green-500 hover:bg-green-500/20 px-8 py-4 rounded-full text-green-400 font-bold text-lg flex items-center justify-center gap-2 transition-all"> Explore Facilities 
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+         </svg></a>
+       </div>
+       <div id="phone-display" class="flex items-center gap-3 text-gray-300">
+        <span class="text-2xl">📞</span> <span class="text-xl font-semibold">+91 92662 01271</span>
+       </div>
+      </div>
+      <div class="relative">
+       <div class="relative rounded-3xl overflow-hidden shadow-2xl animate-float">
+        <img src="https://lh3.googleusercontent.com/p/AF1QipPC9xeW3Keel7caUpn1mXrJW-xYcffufCKEbiID=s1360-w1360-h1020-rw" alt="BOX ARENA Sports Turf" loading="lazy" class="w-full h-auto" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; this.alt='BOX ARENA Sports Facility';">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-6 left-6 right-6">
+         <div class="glass-card rounded-xl p-4 flex items-center justify-between">
+          <div>
+           <p class="text-green-400 font-semibold">Premium Turf</p>
+           <p class="text-gray-300 text-sm">Professional Grade Quality</p>
+          </div>
+          <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+           <span class="text-2xl">⚽</span>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="absolute -top-4 -right-4 glass-card rounded-xl p-4 animate-float" style="animation-delay: 0.5s;">
+        <div class="flex items-center gap-3">
+         <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+          <span class="text-xl">🏏</span>
+         </div>
+         <div>
+          <p class="text-white font-semibold">Box Cricket</p>
+          <p class="text-gray-400 text-sm">Available Now</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+     <a href="#facilities" class="text-gray-400 hover:text-green-400 transition-colors">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg></a>
+    </div>
+   </section><!-- Facilities Section -->
+   <section id="facilities" class="py-24 bg-slate-800/50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16">
+      <span class="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-semibold mb-4">Our Facilities</span>
+      <h2 class="font-bebas text-5xl sm:text-6xl text-white mb-4">World-Class <span class="text-gradient">Sports Facilities</span></h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">Everything you need for an amazing sports experience</p>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Box Cricket -->
+      <div class="facility-card glass-card rounded-2xl p-6 border border-transparent transition-all duration-300 cursor-pointer" onclick="openWhatsApp('box-cricket')">
+       <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6">
+        <span class="text-3xl">🏏</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Box Cricket Turf</h3>
+       <p class="text-gray-400 mb-4">Enjoy fast-paced cricket matches with friends on our well-maintained box cricket turf, designed for exciting small-team matches.</p>
+       <div class="flex items-center gap-2 text-green-400 font-semibold">
+        <span>Book Now</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div>
+      </div><!-- Football Turf -->
+      <div class="facility-card glass-card rounded-2xl p-6 border border-transparent transition-all duration-300 cursor-pointer" onclick="openWhatsApp('football')">
+       <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+        <span class="text-3xl">⚽</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Football Turf</h3>
+       <p class="text-gray-400 mb-4">Play competitive football games on a safe and high-quality turf surface perfect for friendly matches and practice sessions.</p>
+       <div class="flex items-center gap-2 text-green-400 font-semibold">
+        <span>Book Now</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div>
+      </div><!-- Bowling Machine -->
+      <div class="facility-card glass-card rounded-2xl p-6 border border-transparent transition-all duration-300 cursor-pointer" onclick="openWhatsApp('bowling')">
+       <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center mb-6">
+        <span class="text-3xl">🎯</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Bowling Machine</h3>
+       <p class="text-gray-400 mb-4">Improve your batting skills with our advanced bowling machine, suitable for beginners and professional players.</p>
+       <div class="flex items-center gap-2 text-green-400 font-semibold">
+        <span>Book Now</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div>
+      </div><!-- Open Nets -->
+      <div class="facility-card glass-card rounded-2xl p-6 border border-transparent transition-all duration-300 cursor-pointer" onclick="openWhatsApp('practice-nets')">
+       <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6">
+        <span class="text-3xl">🥅</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Open Practice Nets</h3>
+       <p class="text-gray-400 mb-4">Dedicated open nets for cricket practice, allowing players to train and improve their game.</p>
+       <div class="flex items-center gap-2 text-green-400 font-semibold">
+        <span>Book Now</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div>
+      </div><!-- Tournaments -->
+      <div class="facility-card glass-card rounded-2xl p-6 border border-transparent transition-all duration-300 cursor-pointer" onclick="openWhatsApp('tournaments')">
+       <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-2xl flex items-center justify-center mb-6">
+        <span class="text-3xl">🏆</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Group Matches &amp; Tournaments</h3>
+       <p class="text-gray-400 mb-4">Organize friendly matches, tournaments, corporate events, or birthday sports parties at BOX ARENA.</p>
+       <div class="flex items-center gap-2 text-green-400 font-semibold">
+        <span>Book Now</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div>
+      </div><!-- Corporate Events -->
+      <div class="facility-card glass-card rounded-2xl p-6 border border-transparent transition-all duration-300 cursor-pointer" onclick="openWhatsApp('corporate')">
+       <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6">
+        <span class="text-3xl">🎉</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Corporate &amp; Birthday Events</h3>
+       <p class="text-gray-400 mb-4">Host memorable corporate team-building events or birthday sports parties in our premium facility.</p>
+       <div class="flex items-center gap-2 text-green-400 font-semibold">
+        <span>Book Now</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Gallery Section -->
+   <section id="gallery" class="py-24 bg-slate-900 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16">
+      <span class="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-semibold mb-4">Gallery</span>
+      <h2 class="font-bebas text-5xl sm:text-6xl text-white mb-4">Take a <span class="text-gradient">Virtual Tour</span></h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">Click on any image to view it in full size</p>
+     </div>
+     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="gallery-img rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 shadow-lg hover:shadow-green-500/20" onclick="openLightbox(0)">
+       <img src="https://lh3.googleusercontent.com/p/AF1QipPC9xeW3Keel7caUpn1mXrJW-xYcffufCKEbiID=s1360-w1360-h1020-rw" alt="BOX ARENA Turf" loading="lazy" class="w-full h-48 sm:h-64 object-cover" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; this.alt='Gallery Image';">
+      </div>
+      <div class="gallery-img rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 shadow-lg hover:shadow-green-500/20" onclick="openLightbox(1)">
+       <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwerNqUx_ciqR3Y2gDPuMJLuizkSNVPWf2RD4-fyyB_VKiqjRF8ZEqk3aulNLSSFVQTzckjy5Spclu_jRUvTzURju-CTy5tEOZZTbvuy90xJ5ruO53MlCn3-2Tg2LXa9BDeZ3rNDnN6bBGMk=s1360-w1360-h1020-rw" alt="BOX ARENA Facility" loading="lazy" class="w-full h-48 sm:h-64 object-cover" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; this.alt='Gallery Image';">
+      </div>
+      <div class="gallery-img rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 shadow-lg hover:shadow-green-500/20" onclick="openLightbox(2)">
+       <img src="https://lh3.googleusercontent.com/p/AF1QipP4hpR6oRaZwIOezSpW2wA__ZYqmYcD2kv3qHw6=s1360-w1360-h1020-rw" alt="BOX ARENA Sports" loading="lazy" class="w-full h-48 sm:h-64 object-cover" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; this.alt='Gallery Image';">
+      </div>
+      <div class="gallery-img rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 shadow-lg hover:shadow-green-500/20" onclick="openLightbox(3)">
+       <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAweo-vy1-hXGW8RgwLwQRHXn-yxYoqKhopedITlYHySsoeR3yWdwj70D3gkm5fZXGV6jOtYvrJcrcZBtOX0_1IZXpwZa-TZ_BU4Swi_R_sgd2ZqHTa9KrIMpWwXqx7-XeLflOglWMcVYeKT44=s1360-w1360-h1020-rw" alt="BOX ARENA Ground" loading="lazy" class="w-full h-48 sm:h-64 object-cover" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; this.alt='Gallery Image';">
+      </div>
+     </div>
+     <div class="mt-12 text-center">
+      <button onclick="openWhatsApp('gallery')" class="whatsapp-btn px-8 py-4 rounded-full text-white font-bold text-lg inline-flex items-center gap-3 transition-all">
+       <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+       </svg> Book Your Visit Now </button>
+     </div>
+    </div>
+   </section><!-- Why Choose Us Section -->
+   <section id="why-us" class="py-24 bg-slate-800/50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+       <span class="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-semibold mb-4">Why Choose Us</span>
+       <h2 class="font-bebas text-5xl sm:text-6xl text-white mb-6">Why <span class="text-gradient">BOX ARENA</span>?</h2>
+       <div class="space-y-6">
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+          <span class="text-2xl">⚡</span>
+         </div>
+         <div>
+          <h3 class="text-xl font-bold text-white mb-1">Premium Turf Quality</h3>
+          <p class="text-gray-400">Well-maintained sports turf designed for safe and exciting gameplay.</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+          <span class="text-2xl">👥</span>
+         </div>
+         <div>
+          <h3 class="text-xl font-bold text-white mb-1">Perfect for Friends &amp; Teams</h3>
+          <p class="text-gray-400">Play with your friends, teammates, or colleagues in a professional environment.</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+          <span class="text-2xl">📅</span>
+         </div>
+         <div>
+          <h3 class="text-xl font-bold text-white mb-1">Flexible Booking Slots</h3>
+          <p class="text-gray-400">Choose convenient time slots throughout the day.</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+          <span class="text-2xl">🎯</span>
+         </div>
+         <div>
+          <h3 class="text-xl font-bold text-white mb-1">Bowling Machine Practice</h3>
+          <p class="text-gray-400">Train like a professional with advanced cricket practice facilities.</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-4">
+         <div class="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+          <span class="text-2xl">🔥</span>
+         </div>
+         <div>
+          <h3 class="text-xl font-bold text-white mb-1">Great Sports Atmosphere</h3>
+          <p class="text-gray-400">A vibrant and energetic environment for sports lovers.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="relative">
+       <div class="rounded-3xl overflow-hidden shadow-2xl">
+        <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwerNqUx_ciqR3Y2gDPuMJLuizkSNVPWf2RD4-fyyB_VKiqjRF8ZEqk3aulNLSSFVQTzckjy5Spclu_jRUvTzURju-CTy5tEOZZTbvuy90xJ5ruO53MlCn3-2Tg2LXa9BDeZ3rNDnN6bBGMk=s1360-w1360-h1020-rw" alt="BOX ARENA Premium Facility" loading="lazy" class="w-full h-auto" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; this.alt='Premium Sports Facility';">
+       </div><!-- Perfect For Card -->
+       <div class="absolute -bottom-8 -left-8 glass-card rounded-2xl p-6 max-w-xs">
+        <h4 class="font-bebas text-xl text-white mb-3">Perfect For</h4>
+        <div class="grid grid-cols-2 gap-2 text-sm">
+         <div class="flex items-center gap-2 text-gray-300">
+          <span class="text-green-400">✔</span> Cricket Matches
+         </div>
+         <div class="flex items-center gap-2 text-gray-300">
+          <span class="text-green-400">✔</span> Football Games
+         </div>
+         <div class="flex items-center gap-2 text-gray-300">
+          <span class="text-green-400">✔</span> Practice Sessions
+         </div>
+         <div class="flex items-center gap-2 text-gray-300">
+          <span class="text-green-400">✔</span> Corporate Events
+         </div>
+         <div class="flex items-center gap-2 text-gray-300">
+          <span class="text-green-400">✔</span> Birthday Parties
+         </div>
+         <div class="flex items-center gap-2 text-gray-300">
+          <span class="text-green-400">✔</span> Weekend Games
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Pricing Section -->
+   <section id="pricing" class="py-24 bg-slate-800/50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16">
+      <span class="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-semibold mb-4">Affordable Rates</span>
+      <h2 class="font-bebas text-5xl sm:text-6xl text-white mb-4">Pricing <span class="text-gradient">Plans</span></h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">Flexible pricing for every budget and every occasion</p>
+     </div>
+     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="glass-card rounded-2xl p-8 border border-transparent hover:border-green-500/50 transition-all">
+       <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-6">
+        <span class="text-2xl">🏏</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Box Cricket</h3>
+       <p class="text-gray-400 text-sm mb-6">Per Hour Slot</p>
+       <div class="mb-6">
+        <span class="font-bebas text-4xl text-green-400">₹500-</span><span class="text-gray-400">800</span>
+       </div><button onclick="openWhatsApp('pricing-cricket')" class="w-full bg-green-500/20 hover:bg-green-500/40 border border-green-500/50 text-green-400 font-semibold py-3 rounded-lg transition-all">Book Now</button>
+      </div>
+      <div class="glass-card rounded-2xl p-8 border border-transparent hover:border-blue-500/50 transition-all">
+       <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6">
+        <span class="text-2xl">⚽</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Football Turf</h3>
+       <p class="text-gray-400 text-sm mb-6">Per Hour Slot</p>
+       <div class="mb-6">
+        <span class="font-bebas text-4xl text-blue-400">₹600-</span><span class="text-gray-400">900</span>
+       </div><button onclick="openWhatsApp('pricing-football')" class="w-full bg-blue-500/20 hover:bg-blue-500/40 border border-blue-500/50 text-blue-400 font-semibold py-3 rounded-lg transition-all">Book Now</button>
+      </div>
+      <div class="glass-card rounded-2xl p-8 border border-transparent hover:border-orange-500/50 transition-all">
+       <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center mb-6">
+        <span class="text-2xl">🎯</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Bowling Machine</h3>
+       <p class="text-gray-400 text-sm mb-6">Per 30 Minutes</p>
+       <div class="mb-6">
+        <span class="font-bebas text-4xl text-orange-400">₹200-</span><span class="text-gray-400">300</span>
+       </div><button onclick="openWhatsApp('pricing-bowling')" class="w-full bg-orange-500/20 hover:bg-orange-500/40 border border-orange-500/50 text-orange-400 font-semibold py-3 rounded-lg transition-all">Book Now</button>
+      </div>
+      <div class="glass-card rounded-2xl p-8 border border-transparent hover:border-purple-500/50 transition-all">
+       <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-6">
+        <span class="text-2xl">🥅</span>
+       </div>
+       <h3 class="font-bebas text-2xl text-white mb-3">Practice Nets</h3>
+       <p class="text-gray-400 text-sm mb-6">Per Hour Slot</p>
+       <div class="mb-6">
+        <span class="font-bebas text-4xl text-purple-400">₹300-</span><span class="text-gray-400">500</span>
+       </div><button onclick="openWhatsApp('pricing-nets')" class="w-full bg-purple-500/20 hover:bg-purple-500/40 border border-purple-500/50 text-purple-400 font-semibold py-3 rounded-lg transition-all">Book Now</button>
+      </div>
+     </div>
+     <div class="mt-16 glass-card rounded-2xl p-8 border border-green-500/30">
+      <div class="grid md:grid-cols-3 gap-8">
+       <div class="text-center">
+        <div class="text-3xl font-bebas text-green-400 mb-2">
+         Group Bookings
+        </div>
+        <p class="text-gray-400">Get up to 20% discount on group bookings of 10+ persons</p>
+       </div>
+       <div class="text-center">
+        <div class="text-3xl font-bebas text-green-400 mb-2">
+         Monthly Passes
+        </div>
+        <p class="text-gray-400">Unlimited access with exclusive member benefits</p>
+       </div>
+       <div class="text-center">
+        <div class="text-3xl font-bebas text-green-400 mb-2">
+         Corporate Packages
+        </div>
+        <p class="text-gray-400">Customized solutions for team-building events</p>
+       </div>
+      </div>
+      <div class="mt-8 text-center"><button onclick="openWhatsApp('pricing-inquiry')" class="whatsapp-btn px-8 py-4 rounded-full text-white font-bold inline-flex items-center gap-3">
+        <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
+         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg> Get Custom Quote </button>
+      </div>
+     </div>
+    </div>
+   </section><!-- Testimonials Section -->
+   <section class="py-24 bg-slate-900 relative">
+    <div class="absolute inset-0 opacity-10">
+     <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-green-500 rounded-full filter blur-3xl"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+     <div class="text-center mb-16">
+      <span class="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-semibold mb-4">What Players Say</span>
+      <h2 class="font-bebas text-5xl sm:text-6xl text-white mb-4">Player <span class="text-gradient">Reviews</span></h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">Real experiences from our amazing sports community</p>
+     </div>
+     <div class="grid md:grid-cols-3 gap-8">
+      <div class="glass-card rounded-2xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span>
+       </div>
+       <p class="text-gray-300 mb-6">"Amazing experience! The turf quality is outstanding and the staff is very helpful. Had a great cricket match with friends!"</p>
+       <div class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
+         <span class="text-white font-bold">AK</span>
+        </div>
+        <div>
+         <div class="font-semibold text-white">
+          Arjun Kumar
+         </div>
+         <div class="text-gray-500 text-sm">
+          Cricket Enthusiast
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="glass-card rounded-2xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span>
+       </div>
+       <p class="text-gray-300 mb-6">"Perfect for football! The ground is well-maintained and the booking system is super easy. Highly recommended!"</p>
+       <div class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
+         <span class="text-white font-bold">RJ</span>
+        </div>
+        <div>
+         <div class="font-semibold text-white">
+          Raj Jain
+         </div>
+         <div class="text-gray-500 text-sm">
+          Football Player
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="glass-card rounded-2xl p-8 border border-green-500/20 hover:border-green-500/50 transition-all">
+       <div class="flex items-center gap-1 mb-4"><span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span> <span class="text-yellow-400">⭐</span>
+       </div>
+       <p class="text-gray-300 mb-6">"Corporate team-building event was fantastic! Great facilities and wonderful coordination. Worth every penny!"</p>
+       <div class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+         <span class="text-white font-bold">MK</span>
+        </div>
+        <div>
+         <div class="font-semibold text-white">
+          Meera Kapoor
+         </div>
+         <div class="text-gray-500 text-sm">
+          Event Organizer
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- FAQ Section -->
+   <section class="py-24 bg-slate-800/50 relative">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16">
+      <span class="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-semibold mb-4">Common Questions</span>
+      <h2 class="font-bebas text-5xl sm:text-6xl text-white mb-4">FAQs</h2>
+     </div>
+     <div class="space-y-4">
+      <details class="glass-card rounded-xl p-6 border border-green-500/20 cursor-pointer group"><summary class="flex items-center justify-between font-semibold text-white text-lg hover:text-green-400 transition-colors"> <span>What are your operating hours?</span> <span class="text-2xl group-open:rotate-180 transition-transform">+</span> </summary>
+       <p class="text-gray-400 mt-4">We're open from 6:00 AM to 11:00 PM on weekdays and 7:00 AM to 10:00 PM on weekends. Special bookings outside these hours can be arranged by contacting us directly.</p>
+      </details>
+      <details class="glass-card rounded-xl p-6 border border-green-500/20 cursor-pointer group"><summary class="flex items-center justify-between font-semibold text-white text-lg hover:text-green-400 transition-colors"> <span>How do I book a slot?</span> <span class="text-2xl group-open:rotate-180 transition-transform">+</span> </summary>
+       <p class="text-gray-400 mt-4">Simply click on any "Book Now" button and send us a WhatsApp message with your preferred date, time, and activity. Our team will confirm your booking within 30 minutes.</p>
+      </details>
+      <details class="glass-card rounded-xl p-6 border border-green-500/20 cursor-pointer group"><summary class="flex items-center justify-between font-semibold text-white text-lg hover:text-green-400 transition-colors"> <span>What's the cancellation policy?</span> <span class="text-2xl group-open:rotate-180 transition-transform">+</span> </summary>
+       <p class="text-gray-400 mt-4">Cancellations made 24 hours before the booking receive a full refund. Cancellations within 24 hours are charged 50% of the booking amount. No-shows will be charged in full.</p>
+      </details>
+      <details class="glass-card rounded-xl p-6 border border-green-500/20 cursor-pointer group"><summary class="flex items-center justify-between font-semibold text-white text-lg hover:text-green-400 transition-colors"> <span>Do you provide equipment?</span> <span class="text-2xl group-open:rotate-180 transition-transform">+</span> </summary>
+       <p class="text-gray-400 mt-4">Basic equipment like cricket stumps and football goals are provided. Players can bring their own bats, balls, and protective gear. All equipment must be approved by our staff.</p>
+      </details>
+      <details class="glass-card rounded-xl p-6 border border-green-500/20 cursor-pointer group"><summary class="flex items-center justify-between font-semibold text-white text-lg hover:text-green-400 transition-colors"> <span>Are there any group discounts?</span> <span class="text-2xl group-open:rotate-180 transition-transform">+</span> </summary>
+       <p class="text-gray-400 mt-4">Yes! Groups of 10 or more persons get a 20% discount. We also offer special rates for regular weekly/monthly bookings and corporate team-building events.</p>
+      </details>
+      <details class="glass-card rounded-xl p-6 border border-green-500/20 cursor-pointer group"><summary class="flex items-center justify-between font-semibold text-white text-lg hover:text-green-400 transition-colors"> <span>Is there parking available?</span> <span class="text-2xl group-open:rotate-180 transition-transform">+</span> </summary>
+       <p class="text-gray-400 mt-4">Yes, ample parking space is available for our guests. Parking is free for all players. We also provide secure storage facilities for valuables during play.</p>
+      </details>
+     </div>
+    </div>
+   </section><!-- Location Section -->
+   <section id="location" class="py-24 bg-slate-900 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-16">
+      <span class="inline-block bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-semibold mb-4">Find Us</span>
+      <h2 class="font-bebas text-5xl sm:text-6xl text-white mb-4">Our <span class="text-gradient">Location</span></h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">Conveniently located in Sarita Vihar District Park</p>
+     </div>
+     <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="glass-card rounded-3xl p-8">
+       <div class="flex items-start gap-4 mb-8">
+        <div class="w-14 h-14 bg-green-500 rounded-2xl flex items-center justify-center flex-shrink-0">
+         <span class="text-3xl">📍</span>
+        </div>
+        <div>
+         <h3 class="font-bebas text-2xl text-white mb-2">BOX ARENA</h3>
+         <p id="address-display" class="text-gray-400 leading-relaxed">SHANTI BHAWAN,<br>
+           Sarita Vihar District Park, 22/1,<br>
+           Sarita Vihar, New Delhi, Delhi 110076</p>
+        </div>
+       </div>
+       <div class="space-y-4 mb-8">
+        <h4 class="font-bebas text-xl text-white">Easily Accessible From</h4>
+        <div class="flex flex-wrap gap-3">
+         <span class="bg-slate-700 px-4 py-2 rounded-full text-gray-300 text-sm">Sarita Vihar</span> <span class="bg-slate-700 px-4 py-2 rounded-full text-gray-300 text-sm">Jasola</span> <span class="bg-slate-700 px-4 py-2 rounded-full text-gray-300 text-sm">Okhla</span> <span class="bg-slate-700 px-4 py-2 rounded-full text-gray-300 text-sm">Kalindi Kunj</span> <span class="bg-slate-700 px-4 py-2 rounded-full text-gray-300 text-sm">Nearby Areas</span>
+        </div>
+       </div>
+       <div class="flex flex-col sm:flex-row gap-4">
+        <button onclick="openWhatsApp('location')" class="whatsapp-btn flex-1 px-6 py-4 rounded-full text-white font-bold flex items-center justify-center gap-3 transition-all">
+         <svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+         </svg> Book Your Slot </button> <a href="https://maps.google.com/?q=BOX+ARENA+Sarita+Vihar+Delhi" target="_blank" rel="noopener noreferrer" class="flex-1 border-2 border-green-500 hover:bg-green-500/20 px-6 py-4 rounded-full text-green-400 font-bold flex items-center justify-center gap-2 transition-all"> <span class="text-xl">🗺️</span> Get Directions </a>
+       </div>
+      </div>
+      <div class="rounded-3xl overflow-hidden shadow-2xl">
+       <img src="https://lh3.googleusercontent.com/p/AF1QipP4hpR6oRaZwIOezSpW2wA__ZYqmYcD2kv3qHw6=s1360-w1360-h1020-rw" alt="BOX ARENA Location" loading="lazy" class="w-full h-auto" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; this.alt='BOX ARENA Location';">
+      </div>
+     </div>
+    </div>
+   </section><!-- CTA Section -->
+   <section class="py-24 hero-gradient relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+     <div class="absolute top-0 left-1/4 w-96 h-96 bg-green-500 rounded-full filter blur-3xl"></div>
+     <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-emerald-600 rounded-full filter blur-3xl"></div>
+    </div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+     <h2 class="font-bebas text-5xl sm:text-7xl text-white mb-6">Ready to <span class="text-gradient">Play</span>?</h2>
+     <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Gather your friends and book your cricket or football slot at BOX ARENA today. Experience the thrill of sports!</p>
+     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+      <button onclick="openWhatsApp('cta-main')" class="whatsapp-btn animate-pulse-glow px-10 py-5 rounded-full text-white font-bold text-xl flex items-center justify-center gap-3 transition-all">
+       <svg class="w-7 h-7" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+       </svg> Book Your Game Now </button>
+     </div>
+     <p class="text-gray-400 text-lg">📞 Call / WhatsApp: <span class="text-green-400 font-bold">+91 92662 01271</span></p>
+     <p class="mt-8 font-bebas text-2xl text-gradient">Where Champions Play 🏆</p>
+    </div>
+   </section><!-- Footer -->
+   <footer class="bg-slate-950 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="grid md:grid-cols-3 gap-12 mb-12">
+      <!-- Column 1: About -->
+      <div>
+       <div class="flex items-center gap-3 mb-6">
+        <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+         <span class="font-bebas text-2xl">BA</span>
+        </div>
+        <div>
+         <span class="font-bebas text-xl text-white">BOX ARENA</span>
+         <p class="text-gray-500 text-xs">Premium Sports Turf</p>
+        </div>
+       </div>
+       <p class="text-gray-400 text-sm leading-relaxed mb-6">Experience world-class sports facilities with professional-grade turf and equipment. Perfect for cricket, football, and training.</p><button onclick="openWhatsApp('footer-about')" class="whatsapp-btn px-4 py-2 rounded-full text-white font-semibold text-sm flex items-center gap-2 transition-all">
+        <svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg> Contact Us </button>
+      </div><!-- Column 2: Quick Links -->
+      <div>
+       <h4 class="font-bebas text-xl text-white mb-6">Quick Links</h4>
+       <ul class="space-y-3">
+        <li><a href="#facilities" class="text-gray-400 hover:text-green-400 transition-colors text-sm">Our Facilities</a></li>
+        <li><a href="#gallery" class="text-gray-400 hover:text-green-400 transition-colors text-sm">Gallery</a></li>
+        <li><a href="#pricing" class="text-gray-400 hover:text-green-400 transition-colors text-sm">Pricing Plans</a></li>
+        <li><a href="#location" class="text-gray-400 hover:text-green-400 transition-colors text-sm">Location</a></li>
+        <li><a href="#why-us" class="text-gray-400 hover:text-green-400 transition-colors text-sm">Why Us</a></li>
+       </ul>
+      </div><!-- Column 3: Contact Info -->
+      <div>
+       <h4 class="font-bebas text-xl text-white mb-6">Contact Us</h4>
+       <div class="space-y-4">
+        <div class="flex items-start gap-3">
+         <span class="text-2xl">📞</span>
+         <div>
+          <p class="text-gray-400 text-xs mb-1">Phone / WhatsApp</p>
+          <p id="footer-phone" class="text-green-400 font-semibold text-sm">+91 92662 01271</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-3">
+         <span class="text-2xl">📍</span>
+         <div>
+          <p class="text-gray-400 text-xs mb-1">Location</p>
+          <p class="text-gray-300 text-sm">Sarita Vihar District Park, New Delhi</p>
+         </div>
+        </div>
+        <div class="flex items-start gap-3">
+         <span class="text-2xl">🕐</span>
+         <div>
+          <p class="text-gray-400 text-xs mb-1">Operating Hours</p>
+          <p class="text-gray-300 text-sm">Mon-Fri: 6 AM - 11 PM</p>
+          <p class="text-gray-300 text-sm">Sat-Sun: 7 AM - 10 PM</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="pt-8 border-t border-slate-800">
+      <p class="text-gray-500 text-sm text-center mb-4">© 2024 BOX ARENA. All rights reserved. | Where Champions Play 🏆</p>
+      <p class="text-gray-600 text-xs text-center">Design and development by <a href="https://www.gmbguru.in" target="_blank" rel="noopener noreferrer" class="text-green-500 hover:text-green-400 transition-colors font-semibold">GMB Guru</a> | <a href="https://www.gmbguru.in" target="_blank" rel="noopener noreferrer" class="text-green-500 hover:text-green-400 transition-colors">www.gmbguru.in</a></p>
+     </div>
+    </div>
+   </footer><!-- Lightbox -->
+   <div id="lightbox" class="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button> <button class="lightbox-arrow lightbox-prev" onclick="navigateLightbox(-1)">❮</button> <img id="lightbox-img" class="lightbox-content rounded-lg" src="" alt="Gallery Image"> <button class="lightbox-arrow lightbox-next" onclick="navigateLightbox(1)">❯</button>
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+     <button onclick="openWhatsApp('lightbox')" class="whatsapp-btn px-6 py-3 rounded-full text-white font-semibold flex items-center gap-2 transition-all">
+      <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+      </svg> Book This Facility </button>
+    </div>
+   </div><!-- Floating WhatsApp Button --> <button onclick="openWhatsApp('floating')" class="fixed bottom-6 right-6 z-50 whatsapp-btn w-16 h-16 rounded-full flex items-center justify-center shadow-2xl animate-pulse-glow transition-all hover:scale-110">
+    <svg class="w-8 h-8" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg></button>
+  </div>
+  <script>
+    // Configuration
+    const defaultConfig = {
+      hero_title: 'BOX ARENA',
+      hero_subtitle: 'Box Cricket, Football Turf & Bowling Machine in Sarita Vihar, Delhi',
+      phone_number: '+91 92662 01271',
+      address_text: 'SHANTI BHAWAN, Sarita Vihar District Park, 22/1, Sarita Vihar, New Delhi, Delhi 110076',
+      primary_color: '#22c55e',
+      secondary_color: '#0f172a',
+      text_color: '#ffffff',
+      accent_color: '#4ade80',
+      surface_color: 'rgba(255, 255, 255, 0.05)'
+    };
+
+    // Gallery images
+    const galleryImages = [
+      'https://lh3.googleusercontent.com/p/AF1QipPC9xeW3Keel7caUpn1mXrJW-xYcffufCKEbiID=s1360-w1360-h1020-rw',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHVAwerNqUx_ciqR3Y2gDPuMJLuizkSNVPWf2RD4-fyyB_VKiqjRF8ZEqk3aulNLSSFVQTzckjy5Spclu_jRUvTzURju-CTy5tEOZZTbvuy90xJ5ruO53MlCn3-2Tg2LXa9BDeZ3rNDnN6bBGMk=s1360-w1360-h1020-rw',
+      'https://lh3.googleusercontent.com/p/AF1QipP4hpR6oRaZwIOezSpW2wA__ZYqmYcD2kv3qHw6=s1360-w1360-h1020-rw',
+      'https://lh3.googleusercontent.com/gps-cs-s/AHVAweo-vy1-hXGW8RgwLwQRHXn-yxYoqKhopedITlYHySsoeR3yWdwj70D3gkm5fZXGV6jOtYvrJcrcZBtOX0_1IZXpwZa-TZ_BU4Swi_R_sgd2ZqHTa9KrIMpWwXqx7-XeLflOglWMcVYeKT44=s1360-w1360-h1020-rw'
+    ];
+    
+    let currentImageIndex = 0;
+
+    // WhatsApp Lead Function with prefilled message
+    function openWhatsApp(source) {
+      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+      const phone = (config.phone_number || defaultConfig.phone_number).replace(/[^0-9]/g, '');
+      
+      const sourceMessages = {
+        'nav': 'Hi! I found BOX ARENA online and would like to book a slot.',
+        'mobile-nav': 'Hi! I found BOX ARENA online and would like to book a slot.',
+        'hero-book': 'Hi! I am interested in booking a slot at BOX ARENA.',
+        'box-cricket': 'Hi! I would like to book the Box Cricket Turf at BOX ARENA.',
+        'football': 'Hi! I would like to book the Football Turf at BOX ARENA.',
+        'bowling': 'Hi! I would like to book the Bowling Machine Practice at BOX ARENA.',
+        'practice-nets': 'Hi! I would like to book the Open Practice Nets at BOX ARENA.',
+        'tournaments': 'Hi! I would like to organize a Tournament/Group Match at BOX ARENA.',
+        'corporate': 'Hi! I would like to book BOX ARENA for a Corporate/Birthday Event.',
+        'gallery': 'Hi! I saw the gallery and would like to visit BOX ARENA.',
+        'pricing-cricket': 'Hi! I am interested in booking the Box Cricket Turf. Please share available slots and pricing details.',
+        'pricing-football': 'Hi! I am interested in booking the Football Turf. Please share available slots and pricing details.',
+        'pricing-bowling': 'Hi! I am interested in the Bowling Machine Practice. Please share available slots and pricing details.',
+        'pricing-nets': 'Hi! I am interested in the Practice Nets. Please share available slots and pricing details.',
+        'pricing-inquiry': 'Hi! I would like to inquire about custom pricing packages and offers for groups/corporate events.',
+        'location': 'Hi! I would like to book a slot at BOX ARENA, Sarita Vihar.',
+        'cta-main': 'Hi! I am ready to book my game at BOX ARENA!',
+        'footer': 'Hi! I would like to inquire about BOX ARENA.',
+        'footer-about': 'Hi! I would like to know more about BOX ARENA.',
+        'lightbox': 'Hi! I saw your facilities and would like to book a slot.',
+        'floating': 'Hi! I would like to book a slot at BOX ARENA.'
+      };
+
+      const leadFormat = `
+*--- BOX ARENA BOOKING INQUIRY ---*
+
+${sourceMessages[source] || 'Hi! I would like to book a slot at BOX ARENA.'}
+
+*Name:* [Please enter your name]
+*Date:* [Preferred date]
+*Time Slot:* [Preferred time]
+*Activity:* [Cricket/Football/Bowling/Other]
+*Number of Players:* [Number]
+
+*Source:* Website - ${source}
+
+Looking forward to your response!
+      `.trim();
+
+      const encodedMessage = encodeURIComponent(leadFormat);
+      const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+      
+      window.open(whatsappUrl, '_blank');
+    }
+
+    // Lightbox Functions
+    function openLightbox(index) {
+      currentImageIndex = index;
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = galleryImages[index];
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigateLightbox(direction) {
+      currentImageIndex = (currentImageIndex + direction + galleryImages.length) % galleryImages.length;
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = galleryImages[currentImageIndex];
+    }
+
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (lightbox.classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+      }
+    });
+
+    // Close lightbox on background click
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox') {
+        closeLightbox();
+      }
+    });
+
+    // Element SDK Integration
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          // Update hero title
+          const heroTitle = document.getElementById('hero-title');
+          if (heroTitle) {
+            const title = config.hero_title || defaultConfig.hero_title;
+            const parts = title.split(' ');
+            heroTitle.innerHTML = `<span class="text-white">${parts[0] || 'BOX'}</span><span class="text-gradient"> ${parts.slice(1).join(' ') || 'ARENA'}</span>`;
+          }
+
+          // Update nav title
+          const navTitle = document.getElementById('nav-title');
+          if (navTitle) {
+            navTitle.textContent = config.hero_title || defaultConfig.hero_title;
+          }
+
+          // Update hero subtitle
+          const heroSubtitle = document.getElementById('hero-subtitle');
+          if (heroSubtitle) {
+            heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+          }
+
+          // Update phone display
+          const phoneDisplay = document.getElementById('phone-display');
+          if (phoneDisplay) {
+            phoneDisplay.innerHTML = `<span class="text-2xl">📞</span><span class="text-xl font-semibold">${config.phone_number || defaultConfig.phone_number}</span>`;
+          }
+
+          // Update footer phone display
+          const footerPhone = document.getElementById('footer-phone');
+          if (footerPhone) {
+            footerPhone.textContent = config.phone_number || defaultConfig.phone_number;
+          }
+
+          // Update address display
+          const addressDisplay = document.getElementById('address-display');
+          if (addressDisplay) {
+            const address = config.address_text || defaultConfig.address_text;
+            addressDisplay.innerHTML = address.replace(/,/g, ',<br>');
+          }
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                config.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['hero_title', config.hero_title || defaultConfig.hero_title],
+          ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+          ['phone_number', config.phone_number || defaultConfig.phone_number],
+          ['address_text', config.address_text || defaultConfig.address_text]
+        ])
+      });
+    }
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d79f53a264d6b93',t:'MTc3MjcyMjQ4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
